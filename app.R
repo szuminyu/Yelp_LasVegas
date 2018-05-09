@@ -14,7 +14,7 @@ ui <- fluidPage(
             
   navbarPage("Yelp Las Vegas", id = "yelp",
              
-             
+             ##story
              tabPanel("Story",
 
                       mainPanel(id = "Mainstory",
@@ -31,7 +31,7 @@ ui <- fluidPage(
                                     But before we dive into those questions, let’s look at the location of the restaurants and you can pick the restaurant on the map according to your own standard!
                                     '))),
              
-             
+             ##interactive map
              tabPanel("Map",
                       
                       fixedPanel("Visualization",
@@ -56,7 +56,7 @@ ui <- fluidPage(
                                                      )))
              ),
              
-             
+             ##insights
              tabPanel("Insights",
                       
                       
@@ -90,6 +90,7 @@ ui <- fluidPage(
                                 br()
                       )
              ),
+	     ##team members
              tabPanel("Team",
                       mainPanel(  h2("Final Project, DS-GA 3001-015 Data Visualization"),
                                  br(),
@@ -134,7 +135,7 @@ server <- function(input, output, session) {
     map <-leaflet(restaurants) %>%
       addTiles("http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png") %>%
       setView(lat = 36.164277, lng = -115.1111, zoom = 12)%>%
-      addCircles(~longitude, ~latitude, color = ~pal(restaurants$categories), weight = 3, opacity = 0.7,popup = popup, group = "Restaurants")%>%
+      addCircles(~longitude, ~latitude, color = ~pal(restaurants1$categories), weight = 3, opacity = 0.7,popup = popup, group = "Restaurants")%>%
       addCircles(data = casino, ~longitude, ~latitude, color = '#41ab5d', weight = 3, opacity = 0.7, popup = pop1, group = "Casinos")%>%
       leaflet::addLegend(pal = pal, values = ~restaurants$categories, title = "Type of Restaurant", opacity = 0.7, position="bottomleft")%>%
       addLayersControl(overlayGroups = c("Restaurants","Casinos"),
@@ -225,7 +226,7 @@ server <- function(input, output, session) {
   })
   
   
-  #story
+  ##story
   output$g1 <- renderPlot({g1})
   
   
